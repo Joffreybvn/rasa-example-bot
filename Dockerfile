@@ -13,9 +13,10 @@ RUN rm -rf /var/lib/apt/lists/*
 COPY . /opt/app
 WORKDIR /opt/app
 
+RUN chmod +x ./start.sh
+
 # Install the app librairies.
 RUN pip install -r requirements.txt
 
 # Start the app.
-ENTRYPOINT [ "rasa" ]
-CMD [ 'run --model models --enable-api --cors "*" --debug -p $PORT' ]
+ENTRYPOINT [ "./start.sh" ]
